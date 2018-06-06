@@ -1,6 +1,8 @@
 
+
 def hex_to_b64(hex_bytes):
-    bstring = bytes(bytearray.fromhex(hex_bytes))
+    from binascii import unhexlify
+    bstring = unhexlify(hex_bytes)
 
     from base64 import b64encode
     return b64encode(bstring)
