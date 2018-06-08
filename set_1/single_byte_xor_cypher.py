@@ -39,9 +39,17 @@ english_char_frequency = {
 english_chars = english_char_frequency.keys()
 
 
+FAIL_SCORE = 99999
+
+
 def score_text(plaintext):
     char_counts = {c: 0 for c in english_chars}
     skipped_chars = 0
+
+    try:
+        plaintext.decode('ascii')
+    except UnicodeDecodeError:
+        return FAIL_SCORE
 
     for c in plaintext:
         if c not in english_chars:
@@ -94,7 +102,7 @@ def xor_cypher_cracker(cyphertext):
                 best_score = score
                 best_key = key
 
-    return best_key, single_char_cypher_decode(cypher_bytes, best_key).decode('ascii')
+    return best_key, single_char_cypher_decode(cypher_bytes, best_key)
 
 
 def main():
